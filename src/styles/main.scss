@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  background: #30CBD2 ;
+}
+
+.container {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  margin: 0;
+}
+
+//resize the weather icon
+
+.weatherIcon {
+  font-size: 100px;
+}
+
+#title {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+input {
+  border-radius: 0.5rem;
+  font-size: 15px;
+  width: 150px;
+  height: 20px;
+
+}
+
+button {
+  border-radius: 0.75rem;
+  font-size: 15px;
+  background-color: black;
+  color: white;
+  width: 100px;
+  height: 25px;
+}
+
+// Style the weather card 
+
+.weatherCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+}
+
+// Center the weather card title
+
+#locationName {
+  text-align: center;
+  margin-top: -3px;
+}
