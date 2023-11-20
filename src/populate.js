@@ -1,11 +1,16 @@
 import getWeather from "./fetch.js";
+import cloudy from "./assets/cloudy.png";
+import rainy from "./assets/rainy.png";
+import snow from "./assets/snow.png";
+import sunny from "./assets/sunny.png";
+import thunder from "./assets/thunder.png";
 
 // Grab and create DOM elements
 // Get the weather card div
 const weatherCard = document.querySelector(".weatherCard");
 
 //Create DOM elements
-const icon = document.createElement("img");
+const imageWeather = document.createElement("img");
 const location = document.createElement("h2");
 const date = document.createElement("p");
 const time = document.createElement("p");
@@ -13,7 +18,8 @@ const temp = document.createElement("p");
 const conditions = document.createElement("p");
 
 // Set attributes to allow styling
-icon.setAttribute("id", "conditionImg");
+imageWeather.setAttribute("id", "conditionImg");
+imageWeather.setAttribute("alt", "weatherImage");
 location.setAttribute("id", "locationName");
 date.setAttribute("id", "date");
 time.setAttribute("id", "localtime");
@@ -22,7 +28,6 @@ conditions.setAttribute("id", "conditions");
 // Create a weather object with the weather details from API call
 
 const weatherObject = {
-  icon: "",
   location: "",
   date: "",
   time: "",
@@ -53,7 +58,6 @@ export default async function weatherCreate() {
     const weatherData = await getWeather(city);
     //console.log(weatherData);
 
-    weatherObject.icon = weatherData.current.condition.icon;
     weatherObject.location = weatherData.location.name;
     weatherObject.date = new Date(
       weatherData.location.localtime
@@ -61,27 +65,62 @@ export default async function weatherCreate() {
     weatherObject.time = new Date(
       weatherData.location.localtime
     ).toLocaleTimeString("en-US");
-    weatherObject.temp = weatherData.current.temp_f;
+    weatherObject.temp = Math.trunc(weatherData.current.temp_f);
     weatherObject.conditions = weatherData.current.condition.text;
 
     console.log(weatherObject);
+    console.log("Weather conditions:", weatherObject.conditions);
+    console.log("Image source: ", imageWeather.src);
 
-    //Populate the page
-    icon.src = weatherObject.icon;
-    location.textContent = weatherObject.location;
-    date.textContent = `Date: ${weatherObject.date}`;
-    time.textContent = `Time: ${weatherObject.time}`;
-    temp.textContent = `Temp: ${weatherObject.temp}F`;
-    conditions.textContent = `Conditions: ${weatherObject.conditions}`;
-
-    // Append the elements to the weatherCard div
-    weatherCard.appendChild(icon);
-    weatherCard.appendChild(location);
-    weatherCard.appendChild(date);
-    weatherCard.appendChild(time);
-    weatherCard.appendChild(temp);
-    weatherCard.appendChild(conditions);
+    setWeatherImage();
+    populatePage();
   } catch (error) {
     console.error("Error fetching weather data:", error.message);
   }
+}
+
+// Set the weather Image based on weather conditions
+function setWeatherImage() {
+  switch (weatherObject.conditions) {
+    case "Sunny":
+    case "Clear":
+      imageWeather.src = sunny;
+      break;
+    case "Partly cloudy":
+    case "Cloudy":
+      imageWeather.src = cloudy;
+      break;
+    case "Rainy":
+    case "Heavy showers":
+      imageWeather.src = rainy;
+      break;
+    case "Snow showers":
+      imageWeather.src = snow;
+      break;
+    default:
+      imageWeather.src = thunder;
+  }
+
+  //Handle image loading errors
+
+  imageWeather.onerror = function () {
+    console.error("Error loading weather image: ", imageWeather.src);
+  };
+}
+
+// Function to populate the page
+
+function populatePage() {
+  location.textContent = weatherObject.location;
+  date.textContent = `Date: ${weatherObject.date}`;
+  time.textContent = `Time: ${weatherObject.time}`;
+  temp.textContent = `Temp: ${weatherObject.temp}°F`;
+  conditions.textContent = `Conditions: ${weatherObject.conditions}`;
+
+  weatherCard.appendChild(imageWeather);
+  weatherCard.appendChild(location);
+  weatherCard.appendChild(date);
+  weatherCard.appendChild(time);
+  weatherCard.appendChild(temp);
+  weatherCard.appendChild(conditions);
 }
