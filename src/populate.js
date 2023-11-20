@@ -10,6 +10,7 @@ import thunder from "./assets/thunder.png";
 const weatherCard = document.querySelector(".weatherCard");
 
 //Create DOM elements
+const divConditions = document.createElement("div");
 const imageWeather = document.createElement("img");
 const location = document.createElement("h2");
 const date = document.createElement("p");
@@ -18,6 +19,8 @@ const temp = document.createElement("p");
 const conditions = document.createElement("p");
 
 // Set attributes to allow styling
+divConditions.classList.add("conditionsDiv");
+
 imageWeather.setAttribute("id", "conditionImg");
 imageWeather.setAttribute("alt", "weatherImage");
 location.setAttribute("id", "locationName");
@@ -59,9 +62,9 @@ export default async function weatherCreate() {
     //console.log(weatherData);
 
     weatherObject.location = weatherData.location.name;
-    weatherObject.date = new Date(
-      weatherData.location.localtime
-    ).toLocaleDateString("en-US");
+    weatherObject.date = new Date(weatherData.location.localtime).toDateString(
+      "en-US"
+    );
     weatherObject.time = new Date(
       weatherData.location.localtime
     ).toLocaleTimeString("en-US");
@@ -111,16 +114,21 @@ function setWeatherImage() {
 // Function to populate the page
 
 function populatePage() {
+  conditions.textContent = weatherObject.conditions;
   location.textContent = weatherObject.location;
-  date.textContent = `Date: ${weatherObject.date}`;
+  date.textContent = weatherObject.date;
   time.textContent = `Time: ${weatherObject.time}`;
-  temp.textContent = `Temp: ${weatherObject.temp}°F`;
-  conditions.textContent = `Conditions: ${weatherObject.conditions}`;
+  temp.textContent = `${weatherObject.temp}°F`;
 
-  weatherCard.appendChild(imageWeather);
+  divConditions.appendChild(temp);
+  divConditions.appendChild(imageWeather);
+
   weatherCard.appendChild(location);
-  weatherCard.appendChild(date);
-  weatherCard.appendChild(time);
-  weatherCard.appendChild(temp);
   weatherCard.appendChild(conditions);
+
+  weatherCard.appendChild(divConditions);
+  //weatherCard.appendChild(imageWeather);
+
+  //weatherCard.appendChild(date);
+  //weatherCard.appendChild(time);
 }

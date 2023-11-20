@@ -23,7 +23,7 @@ body {
 }
 
 #title {
-  font-size: 35px;
+  font-size: 45px;
   font-weight: 700;
 }
 
@@ -46,7 +46,7 @@ form {
   font-size: 15px;
   background-color: black;
   color: white;
-  width: 120px;
+  width: 80px;
   height: 40px;
   margin-top: -5px;
   font-size: 25px;
@@ -71,9 +71,43 @@ form {
 #locationName {
   text-align: center;
   margin-top: -0.5px;
+  font-size: 3rem;
+}
+
+#conditionImg, #tempF {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  height: 3.5em;
+  width: 3.5em;
+}
+
+#conditions {
+  display: block;
+  margin: auto;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: -30px;
+}
+
+#tempF {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-top: 100px;
 }
 
 #conditionImg {
-  text-align: center;
-  height: 10rem;
+  font-size: 2rem;
+  margin-top: -100px;
+}
+
+
+.conditionsDiv {
+  margin-top: -50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
