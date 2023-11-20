@@ -95,6 +95,7 @@ function setWeatherImage() {
       break;
     case "Rainy":
     case "Heavy showers":
+    case "Light rain":
       imageWeather.src = rainy;
       break;
     case "Snow showers":
