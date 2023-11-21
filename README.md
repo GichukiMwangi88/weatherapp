@@ -1,6 +1,6 @@
 # weatherapp
 
--Weather App Live Preview link:  https://gichukimwangi88.github.io/weatherapp/
+[Weather App Live Preview link](https://gichukimwangi88.github.io/weatherapp/)
 
 I want to share with you about a simple web weather app that I created. The app makes use of a free weather API to fetch and display weather data on the page. 
 
